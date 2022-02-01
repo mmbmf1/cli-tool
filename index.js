@@ -32,7 +32,7 @@ async function askName() {
     type: 'input',
     message: 'What is your name',
     default() {
-      return 'Player'
+      return 'Player 1'
     }
   })
 
@@ -64,7 +64,6 @@ async function question2() {
       'Jon Cusack',
       'Brad Pitt',
       'John Goodman',
-      'Nelly',
       'Cornell Haynes Jr.'
     ]
   })
@@ -77,9 +76,28 @@ async function handleAnswer(isCorrect) {
   await sleep()
 
   if (isCorrect) {
-    spinner.success({text: `Nice work ${playerName}.`})
+    spinner.stop()
+    console.clear()
+    const message = `Correct! \n Nice work \n ${playerName}! \n`
+    figlet(message, (err, data) => {
+      console.log(gradient.rainbow.multiline(data))
+      if (err) {
+        console.log(err)
+      }
+    })
+    await sleep()
+    console.clear()
   } else {
-    spinner.error({ text: `Game over, you lose ${playerName}` })
+    spinner.stop()
+    console.clear()
+    const message = `Game over ! \n you lose \n ${playerName} \n`
+    figlet(message, (err, data) => {
+      console.log(gradient.fruit.multiline(data))
+      if (err) {
+        console.log(err)
+      }
+    })
+    await sleep()
     process.exit(1)
   }
 }
