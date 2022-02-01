@@ -27,7 +27,7 @@ async function welcome() {
 }
 
 async function askName() {
-  const answers = await inquirer.prompt({
+  const answer = await inquirer.prompt({
     name: 'player_name',
     type: 'input',
     message: 'What is your name',
@@ -36,11 +36,11 @@ async function askName() {
     }
   })
 
-  playerName = answers.player_name
+  playerName = answer.player_name
 }
 
 async function question1() {
-  const answers = await inquirer.prompt({
+  const answer = await inquirer.prompt({
     name: 'question_1',
     type: 'list',
     message: 'The capital of Missouri is \n',
@@ -52,7 +52,24 @@ async function question1() {
     ]
   })
 
-  return handleAnswer(answers.question_1 == 'Jefferson City')
+  return handleAnswer(answer.question_1 == 'Jefferson City')
+}
+
+async function question2() {
+  const answer = await inquirer.prompt({
+    name: 'question_2',
+    type: 'list',
+    message: ` What movie star and St. Louis native owns a local restaurant called O'Leary's? \n`,
+    choices: [
+      'Jon Cusack',
+      'Brad Pitt',
+      'John Goodman',
+      'Nelly',
+      'Cornell Haynes Jr.'
+    ]
+  })
+
+  return handleAnswer(answer.question_2 == 'John Goodman')
 }
 
 async function handleAnswer(isCorrect) {
@@ -83,5 +100,6 @@ async function winner() {
 await welcome()
 await askName()
 await question1()
+await question2()
 // more questions
 await winner()
